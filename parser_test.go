@@ -1916,7 +1916,7 @@ func (s *testParserSuite) TestBuiltin(c *C) {
 		{`select stddev_pop(c1, c2) from t`, false, ""},
 		{`select stddev_samp(c1), stddev_samp(all c1), stddev_samp(distinct c1) from t`, true, "SELECT STDDEV_SAMP(`c1`),STDDEV_SAMP(`c1`),STDDEV_SAMP(DISTINCT `c1`) FROM `t`"},
 		{`select stddev_samp(c1, c2) from t`, false, ""},
-		//{`select variance(c1), variance(all c1), variance(distinct c1) from t`, true, "SELECT VAR_POP(`c1`),VAR_POP(`c1`),VAR_POP(DISTINCT `c1`) FROM `t`"},
+		{`select variance(c1), variance(ALL c1) from t`, true, "SELECT VAR_POP(`c1`),VAR_POP(`c1`) FROM `t`"},
 		{`select variance(c1, c2) from t`, false, ""},
 		//{`select var_pop(c1), var_pop(all c1), var_pop(distinct c1) from t`, true, "SELECT VAR_POP(`c1`),VAR_POP(`c1`),VAR_POP(DISTINCT `c1`) FROM `t`"},
 		{`select var_pop(c1, c2) from t`, false, ""},
