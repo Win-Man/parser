@@ -6625,12 +6625,12 @@ SumExpr:
 			$$ = &ast.AggregateFuncExpr{F: $1, Args: []ast.ExprNode{$4}, Distinct: $3.(bool)}
 		}
 	}
-|	builtinVarPop '(' BuggyDefaultFalseDistinctOpt Expression ')' OptWindowingClause
+|	builtinVarPop '(' Expression ')' OptWindowingClause
 	{
-		if $6 != nil {
-			$$ = &ast.WindowFuncExpr{F: ast.AggFuncVarPop, Args: []ast.ExprNode{$4}, Distinct: $3.(bool), Spec: *($6.(*ast.WindowSpec))}
+		if $5 != nil {
+			$$ = &ast.WindowFuncExpr{F: ast.AggFuncVarPop, Args: []ast.ExprNode{$3}, Spec: *($5.(*ast.WindowSpec))}
 		} else {
-			$$ = &ast.AggregateFuncExpr{F: ast.AggFuncVarPop, Args: []ast.ExprNode{$4}, Distinct: $3.(bool)}
+			$$ = &ast.AggregateFuncExpr{F: ast.AggFuncVarPop, Args: []ast.ExprNode{$3}}
 		}
 	}
 |	builtinVarSamp '(' BuggyDefaultFalseDistinctOpt Expression ')' OptWindowingClause
